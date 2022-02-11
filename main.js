@@ -58,10 +58,12 @@
     }
 
     function draw (con,element){
-        switch(element.kind){
-            case "square":
-                contexto.fillRect(element.x,element.y,element.width,element.height);
-                break; 
+        if(element !== null && element.hasOwnProperty("kind")){
+            switch(element.kind){
+                case "square":
+                    contexto.fillRect(element.x,element.y,element.width,element.height);
+                    break; 
+            }
         }
     }
 
