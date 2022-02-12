@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Shizuru&display=swap');
+
+body{
+    background-image: url(https://fondosmil.com/fondo/4736.jpg);
+    background-size: 115em;
+}
+
+.text{
+    color: tomato;
+    font-family: 'Shizuru', cursive;
+    padding: 0.5em;
+    text-align: left;
+    font-size: 5em;
+}
+canvas{
+    border: solid;
+    border-color:rgba(233, 84, 15, 0.76);
+    border-radius: 2em;
+}
+
+/*Yo quería centrar el Canvas y cambiar de color los objetos :c*/
