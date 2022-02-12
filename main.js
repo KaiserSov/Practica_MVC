@@ -21,6 +21,7 @@
 
 (function(){
     self.Ball = function(x,y,radius,board){
+        //Características que necesita la pelota para moverse, y existir
         this.x = x;
         this.y = y;
         this.radius = radius;
@@ -172,6 +173,7 @@
     }
 })();
 
+//Se define aquí la posición de los objetos
 var board = new Board(800,400);
 var bar = new Bar(20,100,40,100,board);
 var bar_2 = new Bar(735,100,40,100,board);
@@ -180,7 +182,7 @@ var board_view = new BoardView(canvas,board);
 var ball = new Ball(350, 100, 10, board);
 
 
-
+//Posición de la pantalla en la consola
 document.addEventListener("keydown",function(ev){
     //Control flechita de arriba
     if(ev.keyCode == 38){
