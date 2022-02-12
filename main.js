@@ -26,9 +26,17 @@
         this.speed_y = 0;
         this.speed_x = 3;
         this.board = board;
+        this.direction = 1;
 
         board.ball = this;
         this.kind = "circle";
+
+    }
+    self.Ball.prototype = {
+        move: function(){
+            this.x += (this.speed_x * this.direction);
+            this.y += (this.speed_y);
+        }
     }
 })();
 
@@ -79,6 +87,7 @@
         play: function(){
             this.clean();
             this.draw();
+            this.board.ball.move();
         }
     }
 
