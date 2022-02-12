@@ -6,6 +6,7 @@
         this.game_over = false;
         this.bars = [];
         this.ball = null;
+        this.playing = false;
     }
 
     //Devuelve barras y la pelota
@@ -85,9 +86,12 @@
             };
         },
         play: function(){
-            this.clean();
-            this.draw();
-            this.board.ball.move();
+            if(this.board.playing){
+                this.clean();
+                this.draw();
+                this.board.ball.move();
+            }
+            
         }
     }
 
@@ -117,30 +121,39 @@ var ball = new Ball(350, 100, 10, board);
 
 
 document.addEventListener("keydown",function(ev){
-    console.log(ev.keyCode);
-    ev.preventDefault();
-
     //Control flechita de arriba
     if(ev.keyCode == 38){
+        ev.preventDefault();
         bar.up();
     }
     //Control flechita de abajo
     else if(ev.keyCode == 40){
+        ev.preventDefault();
         bar.down();
     }
     //Control con W
     if(ev.keyCode == 87){
+        ev.preventDefault();
         bar_2.up();
     }
     //Control con: S
     else if(ev.keyCode == 83){
+        ev.preventDefault();
         bar_2.down();
+    }else if (ev.keyCode === 32){
+        ev.preventDefault();
+        board.playing = !board.playing;
+
     }
     console.log("bar 2: "+bar_2);//Mover barritas
     console.log("Bar 1 "+bar);
 });
 
+board_view.draw();
 window.requestAnimationFrame(controller);
+setTimeout(function(){
+    ball.direction = -1;
+},3000);
 
 function controller(){
     board_view.play();
