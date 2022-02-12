@@ -12,9 +12,23 @@
     self.Board.prototype = {
         get elements (){
             var elements = this.bars;
-            //elements.push(this.ball);
+            elements.push(this.ball);
             return elements;
         }
+    }
+})();
+
+(function(){
+    self.Ball = function(x,y,radius,board){
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.speed_y = 0;
+        this.speed_x = 3;
+        this.board = board;
+
+        board.ball = this;
+        this.kind = "circle";
     }
 })();
 
@@ -27,7 +41,7 @@
         this.board = board;
         this.board.bars.push(this);
         this.kind = "rectangle";
-        this.speed = 10;
+        this.speed = 23; //Cambia la velocidad de movimiento de las barras
     }
 
     self.Bar.prototype = {
@@ -60,7 +74,11 @@
             for (var i = this.board.elements.length -1; i>=0;i--){
                var el = this.board.elements[i];
                draw(this.contexto,el);
-            }
+            };
+        },
+        play: function(){
+            this.clean();
+            this.draw();
         }
     }
 
@@ -69,7 +87,13 @@
             switch(element.kind){
                case "rectangle":
                     contexto.fillRect(element.x,element.y,element.width,element.height);
-                    break; 
+                    break;
+                case "circle":
+                    contexto.beginPath();
+                    contexto.arc(element.x,element.y,element.radius,0,7);
+                    contexto.fill();
+                    contexto.closePath();
+                    break;
             }
     }
 })();
@@ -79,6 +103,7 @@ var bar = new Bar(20,100,40,100,board);
 var bar_2 = new Bar(735,100,40,100,board);
 var canvas = document.getElementById('canvas');
 var board_view = new BoardView(canvas,board);
+var ball = new Ball(350, 100, 10, board);
 
 
 
@@ -109,7 +134,6 @@ document.addEventListener("keydown",function(ev){
 window.requestAnimationFrame(controller);
 
 function controller(){
-    board_view.clean();
-    board_view.draw();
+    board_view.play();
     window.requestAnimationFrame(controller);//se actueliza el estado de las barras
 }
